@@ -22,18 +22,6 @@ flowchart TB
     end
 ```
 
-## How Read/Write Splitting Works
-
-```mermaid
-flowchart LR
-    R[Request comes in] --> Check{What type\nof request?}
-
-    Check -->|"GET\n(reading data)"| Replica[("Replica DB\n(user: app, db: appdb)\n(handles all reads)")]
-    Check -->|"POST / PUT / DELETE\n(changing data)"| Master[("Master DB\n(user: app, db: appdb)\n(handles all writes)")]
-
-    Master -->|"replicator user streams\nevery change to replica"| Replica
-```
-
 ## How Replication Works Step by Step
 
 ```mermaid

@@ -163,14 +163,4 @@ flowchart TB
 
 To view data: **Server → appdb → Schemas → public → Tables → items → Right-click → View/Edit Data**
 
-## Test It
 
-```bash
-# create an item (writes to master)
-curl -X POST http://localhost:8000/items \
-  -H "Content-Type: application/json" \
-  -d '{"title": "hello", "description": "world"}'
-
-# read items (reads from replica — data is there because of sync replication)
-curl http://localhost:8000/items
-```

@@ -1,0 +1,65 @@
+services:
+  db-master:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - master-data:/var/lib/postgresql/data
+      - ./db/init-master.sh:/docker-entrypoint-initdb.d/init-master.sh
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  db-replica:
+    image: postgres:16
+    environment:
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    volumes:
+      - replica-data:/var/lib/postgresql/data
+      - ./db/init-replica.sh:/init-replica.sh
+    entrypoint: ["/bin/bash", "/init-replica.sh"]
+    depends_on:
+      db-master:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      db-master:
+        condition: service_healthy
+
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      MASTER_DATABASE_URL: postgresql://app:app@db-master:5432/appdb
+      REPLICA_DATABASE_URL: postgresql://app:app@db-replica:5432/appdb
+    depends_on:
+      db-master:
+        condition: service_healthy
+      db-replica:
+        condition: service_healthy
+
+volumes:
+  master-data:
+  replica-data:

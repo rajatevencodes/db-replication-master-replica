@@ -1,0 +1,135 @@
+# ========================
+# Python
+# ========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ========================
+# Virtual Environments
+# ========================
+.venv/
+venv/
+ENV/
+env/
+.env/
+
+# ========================
+# Environment Variables
+# ========================
+.env
+.env.*
+!.env.example
+
+# ========================
+# IDE / Editor
+# ========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+.claude/
+.mcp.json
+
+# ========================
+# OS Files
+# ========================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# ========================
+# Testing & Coverage
+# ========================
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# ========================
+# Type Checking
+# ========================
+.mypy_cache/
+.pytype/
+.pyre/
+
+# ========================
+# Distribution / Packaging
+# ========================
+*.tar.gz
+*.whl
+MANIFEST
+
+# ========================
+# Logs
+# ========================
+*.log
+logs/
+
+# ========================
+# Database
+# ========================
+*.db
+*.sqlite3
+*.sql.bak
+alembic/versions/__pycache__/
+
+# ========================
+# Docker
+# ========================
+docker-compose.override.yml
+
+# ========================
+# Secrets & Credentials
+# ========================
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+
+# ========================
+# Jupyter Notebooks
+# ========================
+.ipynb_checkpoints/
+
+# ========================
+# Celery
+# ========================
+celerybeat-schedule
+celerybeat.pid
+
+# ========================
+# Misc
+# ========================
+*.bak
+*.tmp
+*.temp
+.scrapy
+instance/
+.webassets-cache

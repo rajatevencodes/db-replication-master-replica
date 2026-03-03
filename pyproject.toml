@@ -1,0 +1,9 @@
+[project]
+name = "db-master-replica"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]",
+    "sqlalchemy",
+    "psycopg2-binary",
+]
